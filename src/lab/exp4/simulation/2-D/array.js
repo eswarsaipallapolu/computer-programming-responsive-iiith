@@ -10,7 +10,7 @@ window.model = {
 	firstElement: 0,
 	secondElement: 0,
 	multiplyElements: function() {
-		return this.firstElement * this.secondElement
+	    return this.firstElement * this.secondElement
 	}
 }
 
@@ -118,10 +118,10 @@ window.view = {
 		document.getElementById('col').value = ''
 	},
 	generateFirstMatrixElements: function() {
-		var size = this.rowsA * this.colsA
+	    var size = this.rowsA * this.colsA
 		for ( i = 0 ; i < size ; i++)
 		{
-			var random = Math.floor(Math.random()*15)
+			var random = Math.floor(Math.random()*(15)+(size))
 			this.matrixA.push(random)
 		}
 		this.resetRowsAndCols()
@@ -133,11 +133,11 @@ window.view = {
 		this.changeClass( '2DbtnOK', 'button startButton' )
 		this.matrixCount ++
 	},
-	generateSecondMatrixElements: function() {
+	generateSecondMatrixElements: function () {
 		var size = this.rowsB * this.colsB
 		for ( i = 0 ; i < size ; i++)
 		{
-			var random = Math.floor(Math.random()*15)
+			var random = Math.floor(Math.random()*(15)+(size))
 			this.matrixB.push(random)
 		}
 		this.disableButton('generateB')

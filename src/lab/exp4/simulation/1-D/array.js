@@ -1,90 +1,95 @@
 window.view = {
-	numbers: new Array(),
-	lastRedDiv: new Object(),
-	nextRedDiv: new Object(),
-	i: 1,
-	j: 0,
-	key: 0,
-	m: 0,
-	changeClass: function(id, className) {
-		document.getElementById(id).className = className
-	},
-	getLastHighlightedDiv: function() {
-		var findClass = document.getElementsByClassName('showDivInRed')
-		return findClass[0]
-	},
-	resetVariables: function() {
-		this.numbers = new Array()
-		this.lastRedDiv = new Object()
-		this.nextRedDiv = new Object()
-		this.i = 1
-		this.j = 0
-		this.key = 0
-		this.m = 0
-	},
-	getNextDivToHighlight: function(lastHighlightedDiv) {
-		var next = lastHighlightedDiv.nextSibling
-		next = next.nextSibling
-		return next
-	},
-	jumpTo: function(targetDivId) {
-		var element = document.createElement('div')
-		element.id = targetDivId
-		return element
-	},
-	disableButton: function(buttonId) {
-		document.getElementById(buttonId).disabled = true
-	},
-	enableButton: function(buttonId) {
-		document.getElementById(buttonId).disabled = false
-	},
-	addClickEvent: function(id, method) {
-		var element = document.getElementById(id)
-		element.addEventListener('click', method, false)
-	},
-	getArraySize: function() {
-		var inputValue = document.getElementById('inputArraySize').value
-		inputValue = Number(inputValue)
-		return inputValue
-	},
-	activateEvents: function() {
-		this.addClickEvent('btnOk', function() { view.proceedToStartButton() })
-		this.addClickEvent('btnStart', function() { view.displayElements() })
-		this.addClickEvent('btnNext', function() { view.sortArray() })
-	},
-	proceedToStartButton: function() {
-		var userInput = this.getArraySize()
-		if( isNaN( userInput ) === false ) {
-			if( userInput !== 0 ) {
-				var element = document.getElementById('inputButtonRadio')
-				element.className = 'show, radioButtonDivision'
-				this.disableButton('btnOk')
-				this.changeClass( 'btnOk', 'okButton buttonDisable' )
-				this.enableButton( 'btnStart' )
-				this.changeClass( 'btnStart', 'startButton button' )
-			}
-			else
-				alert('Enter array size first !')
-		}
-		else
-			alert( 'Size of the array must be an Integer !' )
-	},
-	generateRandomNumbers: function() {
-		var inputValue = this.getArraySize()
-		for ( i = 0 ; i < inputValue ; i++ ) {
-			var random = Math.floor(Math.random()*15)
-			this.numbers.push(String(random))
-		}
-	},
-	getUserInput: function() {
-		var inputValue = document.getElementById('userInput').value
-		inputValue = inputValue.replace(/\s/g, ',')
-		this.numbers = inputValue.split(',')
-	},
+    numbers: new Array(),
+    lastRedDiv: new Object(),
+    nextRedDiv: new Object(),
+    i: 1,
+    j: 0,
+    key: 0,
+    m: 0,
+    changeClass: function(id, className) {
+        document.getElementById(id).className = className
+    },
+    getLastHighlightedDiv: function() {
+        var findClass = document.getElementsByClassName('showDivInRed')
+        return findClass[0]
+    },
+    resetVariables: function() {
+        this.numbers = new Array()
+        this.lastRedDiv = new Object()
+        this.nextRedDiv = new Object()
+        this.i = 1
+        this.j = 0
+        this.key = 0
+        this.m = 0
+    },
+    getNextDivToHighlight: function(lastHighlightedDiv) {
+        var next = lastHighlightedDiv.nextSibling
+        next = next.nextSibling
+        return next
+
+    },
+    jumpTo: function(targetDivId) {
+        var element = document.createElement('div')
+        element.id = targetDivId
+        return element
+    },
+    disableButton: function(buttonId) {
+        document.getElementById(buttonId).disabled = true
+    },
+    enableButton: function(buttonId) {
+        document.getElementById(buttonId).disabled = false
+    },
+    addClickEvent: function(id, method) {
+        var element = document.getElementById(id)
+        element.addEventListener('click', method, false)
+    },
+    getArraySize: function() {
+        var inputValue = document.getElementById('inputArraySize').value
+        inputValue = Number(inputValue)
+        return inputValue
+    },
+    activateEvents: function() {
+        this.addClickEvent('btnOk', function() { view.proceedToStartButton() })
+        this.addClickEvent('btnStart', function() { view.displayElements() })
+        this.addClickEvent('btnNext', function() { view.sortArray() })
+    },
+
+    proceedToStartButton: function() {
+        var userInput = this.getArraySize()
+        if (isNaN(userInput) === false) {
+            if( userInput !== 0 ) {
+                var element = document.getElementById('inputButtonRadio')
+                element.className = 'show, radioButtonDivision'
+                this.disableButton('btnOk')
+                this.changeClass( 'btnOk', 'okButton buttonDisable' )
+                this.enableButton( 'btnStart' )
+                this.changeClass( 'btnStart', 'startButton button' )
+            }
+            else
+                alert('Enter array size first !')
+        }
+        else
+            alert( 'Size of the array must be an Integer !' )
+    },
+    generateRandomNumbers: function() {
+        var inputValue = this.getArraySize()
+        document.getElementById("userInput").disabled=true;
+        for (i = 0 ; i < inputValue ; i++)
+        {
+            var random = Math.floor(Math.random()*15)
+            this.numbers.push(String(random))
+        }
+    },
+    getUserInput: function () {
+        var inputValue = document.getElementById('userInput').value
+        inputValue = inputValue.replace(/\s/g, ',')
+        this.numbers = inputValue.split(',')
+    },
+
 	takeInputFromRadioBox: function() {
 		var element = document.getElementsByName('radio_group')
 		if ( element[0].checked )
-			this.generateRandomNumbers()
+		    this.generateRandomNumbers()
 		else if (element[1].checked)
 			this.getUserInput()
 	},
@@ -148,9 +153,9 @@ window.view = {
 		for ( i = 0 ; i < this.numbers.length ; i++ )
 			this.numbers[i] = Number(this.numbers[i])
 	},
-	displayElements: function() {
-		this.takeInputFromRadioBox()
-		var arraySize = this.getArraySize()
+	    displayElements: function() {
+	    this.takeInputFromRadioBox()
+	    var arraySize = this.getArraySize()
 		var isValidInput = this.validateUserInputs()
 		if ( arraySize === this.numbers.length ) {	
 			if ( isValidInput === false)
