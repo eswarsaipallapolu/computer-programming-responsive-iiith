@@ -33,9 +33,16 @@ window.view = {
  		document.getElementById(y).style.display = 'block' 
  	},
 	getInput: function() {
-		var inputValue = document.getElementById('simpleLoopInput').value
-		model.inp = Number(inputValue)
-		this.clearExecutionSection()
+	    var inputValue = document.getElementById('simpleLoopInput').value
+	    if (Number(inputValue) >= 20)
+	    {
+	        alert("INVALID INPUT");
+	    }
+	    else
+	    {
+	        model.inp = Number(inputValue)
+	        this.clearExecutionSection()
+	    }
 	},
 	getNestedInput: function() {
 		var inputValue = document.getElementById('nestedLoopInput').value
